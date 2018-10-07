@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script type="text/javascript" src="instascan.min.js"></script>
+<link rel="shortcut icon" href="#">    
+<meta charset="utf-8" />
+<title></title>
+<style type="text/css">
+* {
+    box-sizing: border-box;
+}
+    body {
+            background-color: black;
+        } 
+    p1 {
+        color: white;
+        font-size: 3vw;
+        display: block;
+        margin-left: 25vw;
+        padding-top: 10vh;
+        color: rosybrown;
+        display: none;
+    }
+    button {
+        width: 20vw;
+        height: 4vh;
+        color: white;
+        background-color: deepskyblue;
+        border: 1px white;
+        border-radius: 5px;
+        display: block;
+        margin-left: 40vw;
+        margin-top: 65vh;
+        font-size: 1vw;
+    }
+    #supermarket {
+        display: block;
+    }
+    </style>
+</head>
+<body>
+<!--<script src="blockchain.js"></script>-->
+<p1 id="supermarket">Travel journey of the product</p1> 
+<p1 id="producer">Travel journey of the product</p1> 
+<p1 id="intermediate_supplier">Travel journey of the product</p1> 
+<p1 id="farm">Travel journey of the product</p1>     
+<script>  
+$.ajax({
+    url: "https://maas-proxy.cfapps.eu10.hana.ondemand.com/38f0d85c-b4f4-4317-83ac-d4fa8d80b1f2/rpc",
+    type: "POST",
+    data : JSON.stringify( { "method": "liststreamkeyitems", "params": ["coffee_bean", "supermarket"] } ),
+    headers: {
+      "apikey": "3zftX75QY9qZEgwZN4DdGhjZ3YmkPXm6q2nANU86svjD3TQCoccqbQ5PNU8mtKzz"
+    },
+    dataType: 'json',
+    success: function (data) {
+        //console.info(data.result[0].data);
+    
+    var hexx=data.result[0].data; // HEX to ASCII conversion
+    var hex = hexx.toString();//force conversion
+    var str = '';
+    for (var i = 0; (i < hex.length && hex.substr(i, 2) !== '00'); i += 2)
+        str += String.fromCharCode(parseInt(hex.substr(i, 2), 16));         
+        document.getElementById("supermarket").addEventListener("click", function(){
+        document.getElementById("supermarket").innerHTML = str;
+        document.getElementById("supermarket").style.color = "white";    
+        document.getElementById("producer").style.display = "block";
+        });
+               
+    }
+}); 
+
+    
+$.ajax({
+    url: "https://maas-proxy.cfapps.eu10.hana.ondemand.com/38f0d85c-b4f4-4317-83ac-d4fa8d80b1f2/rpc",
+    type: "POST",
+    data : JSON.stringify( { "method": "liststreamkeyitems", "params": ["coffee_bean", "producer"] } ),
+    headers: {
+      "apikey": "3zftX75QY9qZEgwZN4DdGhjZ3YmkPXm6q2nANU86svjD3TQCoccqbQ5PNU8mtKzz"
+    },
+    dataType: 'json',
+    success: function (data) {
+        //console.info(data.result[0].data);
+    
+    var hexx=data.result[0].data; // HEX to ASCII conversion
+    var hex = hexx.toString();//force conversion
+    var str = '';
+    for (var i = 0; (i < hex.length && hex.substr(i, 2) !== '00'); i += 2)
+        str += String.fromCharCode(parseInt(hex.substr(i, 2), 16));         
+        document.getElementById("producer").addEventListener("click", function(){
+        document.getElementById("producer").innerHTML = str;
+        document.getElementById("producer").style.color = "white";     
+        document.getElementById("intermediate_supplier").style.display = "block";     
+        });
+    }
+}); 
+
+    
+$.ajax({
+    url: "https://maas-proxy.cfapps.eu10.hana.ondemand.com/38f0d85c-b4f4-4317-83ac-d4fa8d80b1f2/rpc",
+    type: "POST",
+    data : JSON.stringify( { "method": "liststreamkeyitems", "params": ["coffee_bean", "intermediate_supplier"] } ),
+    headers: {
+      "apikey": "3zftX75QY9qZEgwZN4DdGhjZ3YmkPXm6q2nANU86svjD3TQCoccqbQ5PNU8mtKzz"
+    },
+    dataType: 'json',
+    success: function (data) {
+        //console.info(data.result[0].data);
+    
+    var hexx=data.result[0].data; // HEX to ASCII conversion
+    var hex = hexx.toString();//force conversion
+    var str = '';
+    for (var i = 0; (i < hex.length && hex.substr(i, 2) !== '00'); i += 2)
+        str += String.fromCharCode(parseInt(hex.substr(i, 2), 16));         
+        document.getElementById("intermediate_supplier").addEventListener("click", function(){
+        document.getElementById("intermediate_supplier").innerHTML = str;
+        document.getElementById("intermediate_supplier").style.color = "white";      
+        document.getElementById("farm").style.display = "block";      
+        });
+    }
+}); 
+    
+
+$.ajax({
+    url: "https://maas-proxy.cfapps.eu10.hana.ondemand.com/38f0d85c-b4f4-4317-83ac-d4fa8d80b1f2/rpc",
+    type: "POST",
+    data : JSON.stringify( { "method": "liststreamkeyitems", "params": ["coffee_bean", "farm"] } ),
+    headers: {
+      "apikey": "3zftX75QY9qZEgwZN4DdGhjZ3YmkPXm6q2nANU86svjD3TQCoccqbQ5PNU8mtKzz"
+    },
+    dataType: 'json',
+    success: function (data) {
+        //console.info(data.result[0].data);
+    
+    var hexx=data.result[0].data; // HEX to ASCII conversion
+    var hex = hexx.toString();//force conversion
+    var str = '';
+    for (var i = 0; (i < hex.length && hex.substr(i, 2) !== '00'); i += 2)
+        str += String.fromCharCode(parseInt(hex.substr(i, 2), 16));         
+        document.getElementById("farm").addEventListener("click", function(){
+        document.getElementById("farm").style.color = "white";     
+        document.getElementById("farm").innerHTML = str;
+        });
+    }
+});     
+    
+</script>     
+</body>
+</html>

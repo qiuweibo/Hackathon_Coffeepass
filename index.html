@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script type="text/javascript" src="instascan.min.js"></script>
+<link rel="shortcut icon" href="#">    
+<meta charset="utf-8" />
+<title></title>
+<style type="text/css">
+* {
+    box-sizing: border-box;
+}
+    body {
+            width: 100vw;
+            height: 100vh; 
+            background-image: url(CoffeeBeans.gif);
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center; 
+            background-color: black;
+        } 
+    p1 {
+        color: white;
+        font-size: 3vw;
+        display: block;
+        margin-left: 35vw;
+        padding-top: 10vh;
+    }
+    button {
+        width: 20vw;
+        height: 4vh;
+        color: white;
+        background-color: deepskyblue;
+        border: 1px white;
+        border-radius: 5px;
+        display: block;
+        margin-left: 40vw;
+        margin-top: 65vh;
+        font-size: 1vw;
+    }
+    #qrcode {
+        display: none;
+    }
+    #preview{
+        margin-left: 30vw;
+    }
+    </style>
+</head>
+<body>
+<script src="blockchain.js"></script>
+    <p1 id="sign">COFFEE PASSPORT</p1>
+    <button onclick="scan()" id="button1">SCAN</button>
+    
+    <div id="qrcode"><video id="preview"></video></div>
+ <script type="text/javascript">
+      let scanner = new Instascan.Scanner({ video: document.getElementById('preview') });
+      scanner.addListener('scan', function (content) {
+       window.open(content); //console.log(content);
+      });
+      Instascan.Camera.getCameras().then(function (cameras) {
+        if (cameras.length > 0) {
+          scanner.start(cameras[0]);
+        } else {
+          console.error('No cameras found.');
+        }
+      }).catch(function (e) {
+        console.error(e);
+      });
+    </script>  
+    
+    <script>
+        function scan() {
+            var x = document.getElementById("qrcode");
+             x.style.display = "block";
+            document.getElementById("sign").style.display = "none";  
+            document.getElementById("button1").style.display = "none";    
+        }
+    </script>
+    
+</body>
+</html>
